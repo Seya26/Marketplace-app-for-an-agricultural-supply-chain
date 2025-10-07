@@ -1,0 +1,465 @@
+{
+	"info": {
+		"_postman_id": "1e194d38-0f2f-4c81-9dba-505d5c174aca",
+		"name": "Chiamate su Eventi, Inviti, Registrazione, Login, Convalida account",
+		"description": "Raccolta di richieste senza script: esegui in ordine, sostituisci manualmente le variabili {{...}} con gli ID reali ottenuti dalle risposte.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45932539",
+		"_collection_link": "https://alessandro-5051877.postman.co/workspace/Alessandro's-Workspace~7c94a1d0-a894-4643-88c6-00ea2f9eccea/collection/45932539-1e194d38-0f2f-4c81-9dba-505d5c174aca?action=share&source=collection_link&creator=45932539"
+	},
+	"item": [
+		{
+			"name": "03. WhoAmI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/utenti/whoami",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"whoami"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04. Crea evento FUTURO (capienza 2)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titolo\": \"Demo Future Event\",\n  \"descrizione\": \"Evento di prova\",\n  \"luogo\": \"Sala A\",\n  \"dataInizio\": \"2025-09-04T14:26:27\",\n  \"dataFine\": \"2025-09-04T16:26:27\",\n  \"illimitato\": false,\n  \"capienzaMax\": 2\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/eventi/crea",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi",
+						"crea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05. Lista eventi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/eventi",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06. Registra Venditore #1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Luigi\",\n  \"cognome\": \"Bianchi\",\n  \"email\": \"vend1@example.com\",\n  \"password\": \"pw\",\n  \"tipo\": \"VENDITORE\",\n  \"codiceFiscale\": \"CFVEND1\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/utenti/registrazione",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"registrazione"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "07. Registra Venditore #2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"Anna\",\n  \"cognome\": \"Verdi\",\n  \"email\": \"vend2@example.com\",\n  \"password\": \"pw\",\n  \"tipo\": \"VENDITORE\",\n  \"codiceFiscale\": \"CFVEND2\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/utenti/registrazione",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"registrazione"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "08. Lista venditori",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/utenti/venditori",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"venditori"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "09. Crea inviti per evento {eventoId}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idUtentiList\": [\n    \"{{vend1Id}}\",\n    \"{{vend2Id}}\"\n  ],\n  \"messaggio\": \"Siete invitati!\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/eventi/{{eventoId}}/inviti",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi",
+						"{{eventoId}}",
+						"inviti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11. Inviti ricevuti (utente in sessione)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/utenti/inviti/ricevuti",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"inviti",
+						"ricevuti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12. Rispondi invito {invitoId}: ACCETTA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/inviti/{{invitoId}}/azione/ACCETTA",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"inviti",
+						"{{invitoId}}",
+						"azione",
+						"ACCETTA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13. Rispondi invito {invitoId}: RIFIUTA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/inviti/{{invitoId}}/azione/RIFIUTA",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"inviti",
+						"{{invitoId}}",
+						"azione",
+						"RIFIUTA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "14. Crea evento PASSATO",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"titolo\": \"Evento Passato\",\n  \"descrizione\": \"Già terminato\",\n  \"luogo\": \"Sala B\",\n  \"dataInizio\": \"2025-09-01T14:26:27\",\n  \"dataFine\": \"2025-09-01T16:26:27\",\n  \"illimitato\": false,\n  \"capienzaMax\": 10\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/eventi/crea",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi",
+						"crea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "15. Crea inviti su evento passato {eventoPassatoId}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"idUtentiList\": [\n    \"{{vend1Id}}\"\n  ],\n  \"messaggio\": \"test\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/eventi/{{eventoPassatoId}}/inviti",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi",
+						"{{eventoPassatoId}}",
+						"inviti"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "16. Impersona Utente tramite id (solo testing)",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Iscriviti ad Evento (acquirente in sessione)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/eventi/1/iscrivi",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi",
+						"1",
+						"iscrivi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disiscriviti ad Evento (acquirente in sessione)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/eventi/1/iscrivi",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi",
+						"1",
+						"iscrivi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Visualizza tutti utenti",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Visualizza Notifiche (tramite observer pattern)",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"acquirente@example.com\",\r\n    \"password\": \"psw\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/utenti/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{baseUrl}}/utenti/logout",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elimina Evento",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/eventi/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"eventi",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Visualizza Utenti non approvati (solo gestore in sessione)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/utenti/non-approvati",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"non-approvati"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Convalida registraz. utente (solo gestore in sessione)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/utenti/accetta/8",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"utenti",
+						"accetta",
+						"8"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

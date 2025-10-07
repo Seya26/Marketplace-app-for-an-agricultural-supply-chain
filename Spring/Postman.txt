@@ -1,0 +1,17 @@
+POSTMAN
+
+POST http://localhost:8080/gestionale/sessione
+POST http://localhost:8080/utenti/login-test
+
+POST http://localhost:8080/prodotti
+{
+"venditoreId": 1,
+"nome": "Mela",
+"categoria": "Frutta",
+"prezzo": 1.50,
+"dataScadenza": "2025-12-31"
+}
+GET http://localhost:8080/prodotti
+POST http://localhost:8080/acquisto/carrello/1?qty=2
+POST http://localhost:8080/acquisto/acquista
+GET http://localhost:8080/utenti/ordini
